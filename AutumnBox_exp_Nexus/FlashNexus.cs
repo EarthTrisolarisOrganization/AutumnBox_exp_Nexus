@@ -1,7 +1,9 @@
-﻿using AutumnBox.Basic.Calling;
-using AutumnBox.Basic.Device;
+﻿using AutumnBox.Basic.Device;
+using AutumnBox.Logging;
 using AutumnBox.OpenFramework.Extension;
 using AutumnBox.OpenFramework.LeafExtension;
+using AutumnBox.OpenFramework.LeafExtension.Fast;
+using AutumnBox.OpenFramework.LeafExtension.Kit;
 using Microsoft.Win32;
 
 namespace AutumnBox_exp_Nexus
@@ -12,30 +14,30 @@ namespace AutumnBox_exp_Nexus
     [ExtMinApi(8)]
     [ExtAuth("神经元")]
     [ExtDesc("给Nexus和Pixel刷入Bootloader.img")]
-    [ExtVersion(1, 0, 0)]
+    [ExtVersion(1, 1, 0)]
     [ExtIcon("Icons.cd.png")]
-    internal class FlashNexusBL : StrictVisualExtension
+    internal class FlashNexusBL : LeafExtensionBase
     {
-        protected override int VisualMain()
+        public void Main(IDevice device, ILeafUI leafUI)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Reset();
-            openFileDialog.Title = "选择一个文件";
-            openFileDialog.Filter = "镜像文件(*.img)|*.img|全部文件(*.*)|*.*";
-            openFileDialog.Multiselect = false;
-            if (openFileDialog.ShowDialog() != true) return ERR_CANCELED_BY_USER;
-            WriteLine(openFileDialog.FileName);
-            using (CommandExecutor executor = new CommandExecutor())
+            using (leafUI)
             {
-                executor.To((e) => { WriteLine(e.Text); });
-                var result = executor.Fastboot(DeviceSelectedOnCreating, $"flash bootloader \"{openFileDialog.FileName}\"");
-                return result.ExitCode;
+                leafUI.Icon = this.GetIconBytes();
+                leafUI.CloseButtonClicked += (s, e) =>
+                {
+                    e.CanBeClosed = false;
+                };
+                leafUI.Show();
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Reset();
+                openFileDialog.Title = "选择一个文件";
+                openFileDialog.Filter = "镜像文件(*.img)|*.img|全部文件(*.*)|*.*";
+                openFileDialog.Multiselect = false;
+                if (openFileDialog.ShowDialog() != true) leafUI.Finish(LeafConstants.ERR_CANCELED_BY_USER);
+                leafUI.WriteLine(openFileDialog.FileName);
+                var result = device.Fastboot($"flash bootloader \"{openFileDialog.FileName}\"");
+                leafUI.Finish(result.Item2);
             }
-        }
-        protected override bool VisualStop()
-        {
-            base.VisualStop();
-            return false;
         }
     }
 
@@ -45,30 +47,30 @@ namespace AutumnBox_exp_Nexus
     [ExtMinApi(8)]
     [ExtAuth("神经元")]
     [ExtDesc("给Nexus和Pixel刷入Radio.img")]
-    [ExtVersion(1, 0, 0)]
+    [ExtVersion(1, 1, 0)]
     [ExtIcon("Icons.cd.png")]
-    internal class FlashNexusRadio : StrictVisualExtension
+    internal class FlashNexusRadio : LeafExtensionBase
     {
-        protected override int VisualMain()
+        public void Main(IDevice device, ILeafUI leafUI)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Reset();
-            openFileDialog.Title = "选择一个文件";
-            openFileDialog.Filter = "镜像文件(*.img)|*.img|全部文件(*.*)|*.*";
-            openFileDialog.Multiselect = false;
-            if (openFileDialog.ShowDialog() != true) return ERR_CANCELED_BY_USER;
-            WriteLine(openFileDialog.FileName);
-            using (CommandExecutor executor = new CommandExecutor())
+            using (leafUI)
             {
-                executor.To((e) => { WriteLine(e.Text); });
-                var result = executor.Fastboot(DeviceSelectedOnCreating, $"flash radio \"{openFileDialog.FileName}\"");
-                return result.ExitCode;
+                leafUI.Icon = this.GetIconBytes();
+                leafUI.CloseButtonClicked += (s, e) =>
+                {
+                    e.CanBeClosed = false;
+                };
+                leafUI.Show();
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Reset();
+                openFileDialog.Title = "选择一个文件";
+                openFileDialog.Filter = "镜像文件(*.img)|*.img|全部文件(*.*)|*.*";
+                openFileDialog.Multiselect = false;
+                if (openFileDialog.ShowDialog() != true) leafUI.Finish(LeafConstants.ERR_CANCELED_BY_USER);
+                leafUI.WriteLine(openFileDialog.FileName);
+                var result = device.Fastboot($"flash radio \"{openFileDialog.FileName}\"");
+                leafUI.Finish(result.Item2);
             }
-        }
-        protected override bool VisualStop()
-        {
-            base.VisualStop();
-            return false;
         }
     }
 
@@ -80,28 +82,28 @@ namespace AutumnBox_exp_Nexus
     [ExtDesc("给Nexus和Pixel刷入vendor.img")]
     [ExtVersion(1, 0, 0)]
     [ExtIcon("Icons.cd.png")]
-    internal class FlashNexusVendor : StrictVisualExtension
+    internal class FlashNexusVendor : LeafExtensionBase
     {
-        protected override int VisualMain()
+        public void Main(IDevice device, ILeafUI leafUI)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Reset();
-            openFileDialog.Title = "选择一个文件";
-            openFileDialog.Filter = "镜像文件(*.img)|*.img|全部文件(*.*)|*.*";
-            openFileDialog.Multiselect = false;
-            if (openFileDialog.ShowDialog() != true) return ERR_CANCELED_BY_USER;
-            WriteLine(openFileDialog.FileName);
-            using (CommandExecutor executor = new CommandExecutor())
+            using (leafUI)
             {
-                executor.To((e) => { WriteLine(e.Text); });
-                var result = executor.Fastboot(DeviceSelectedOnCreating, $"flash vendor \"{openFileDialog.FileName}\"");
-                return result.ExitCode;
+                leafUI.Icon = this.GetIconBytes();
+                leafUI.CloseButtonClicked += (s, e) =>
+                {
+                    e.CanBeClosed = false;
+                };
+                leafUI.Show();
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Reset();
+                openFileDialog.Title = "选择一个文件";
+                openFileDialog.Filter = "镜像文件(*.img)|*.img|全部文件(*.*)|*.*";
+                openFileDialog.Multiselect = false;
+                if (openFileDialog.ShowDialog() != true) leafUI.Finish(LeafConstants.ERR_CANCELED_BY_USER);
+                leafUI.WriteLine(openFileDialog.FileName);
+                var result = device.Fastboot($"flash vendor \"{openFileDialog.FileName}\"");
+                leafUI.Finish(result.Item2);
             }
-        }
-        protected override bool VisualStop()
-        {
-            base.VisualStop();
-            return false;
         }
     }
 
@@ -113,28 +115,28 @@ namespace AutumnBox_exp_Nexus
     [ExtDesc("给Nexus和Pixel刷入system.img")]
     [ExtVersion(1, 0, 0)]
     [ExtIcon("Icons.cd.png")]
-    internal class FlashNexusSystem : StrictVisualExtension
+    internal class FlashNexusSystem : LeafExtensionBase
     {
-        protected override int VisualMain()
+        public void Main(IDevice device, ILeafUI leafUI)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Reset();
-            openFileDialog.Title = "选择一个文件";
-            openFileDialog.Filter = "镜像文件(*.img)|*.img|全部文件(*.*)|*.*";
-            openFileDialog.Multiselect = false;
-            if (openFileDialog.ShowDialog() != true) return ERR_CANCELED_BY_USER;
-            WriteLine(openFileDialog.FileName);
-            using (CommandExecutor executor = new CommandExecutor())
+            using (leafUI)
             {
-                executor.To((e) => { WriteLine(e.Text); });
-                var result = executor.Fastboot(DeviceSelectedOnCreating, $"flash system \"{openFileDialog.FileName}\"");
-                return result.ExitCode;
+                leafUI.Icon = this.GetIconBytes();
+                leafUI.CloseButtonClicked += (s, e) =>
+                {
+                    e.CanBeClosed = false;
+                };
+                leafUI.Show();
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Reset();
+                openFileDialog.Title = "选择一个文件";
+                openFileDialog.Filter = "镜像文件(*.img)|*.img|全部文件(*.*)|*.*";
+                openFileDialog.Multiselect = false;
+                if (openFileDialog.ShowDialog() != true) leafUI.Finish(LeafConstants.ERR_CANCELED_BY_USER);
+                leafUI.WriteLine(openFileDialog.FileName);
+                var result = device.Fastboot($"flash system \"{openFileDialog.FileName}\"");
+                leafUI.Finish(result.Item2);
             }
-        }
-        protected override bool VisualStop()
-        {
-            base.VisualStop();
-            return false;
         }
     }
 }
