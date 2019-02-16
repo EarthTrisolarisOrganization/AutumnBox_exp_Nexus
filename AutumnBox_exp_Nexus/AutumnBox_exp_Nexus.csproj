@@ -42,16 +42,17 @@
     <Compile Include="FlashNexus.cs" />
     <Compile Include="UnlookNexus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WipeGoogleLock.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="AutumnBox.Basic, Version=2019.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutumnBox.SDK.8.18.0\lib\net461\AutumnBox.Basic.dll</HintPath>
+    <Reference Include="AutumnBox.Basic, Version=2019.2.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutumnBox.SDK.8.28.0-beta\lib\net461\AutumnBox.Basic.dll</HintPath>
     </Reference>
-    <Reference Include="AutumnBox.OpenFramework, Version=8.18.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutumnBox.SDK.8.18.0\lib\net461\AutumnBox.OpenFramework.dll</HintPath>
+    <Reference Include="AutumnBox.Logging, Version=2019.2.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutumnBox.SDK.8.28.0-beta\lib\net461\AutumnBox.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="AutumnBox.OpenFramework, Version=8.28.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutumnBox.SDK.8.28.0-beta\lib\net461\AutumnBox.OpenFramework.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -61,6 +62,11 @@
     <EmbeddedResource Include="Icons\cd.png" />
     <EmbeddedResource Include="Icons\unlock.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\google.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
