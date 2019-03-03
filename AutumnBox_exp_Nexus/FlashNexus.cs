@@ -1,4 +1,5 @@
-﻿using AutumnBox.Basic.Device;
+﻿using AutumnBox.Basic.Calling;
+using AutumnBox.Basic.Device;
 using AutumnBox.Logging;
 using AutumnBox.OpenFramework.Extension;
 using AutumnBox.OpenFramework.LeafExtension;
@@ -35,8 +36,12 @@ namespace AutumnBox_exp_Nexus
                 openFileDialog.Multiselect = false;
                 if (openFileDialog.ShowDialog() != true) leafUI.Finish(LeafConstants.ERR_CANCELED_BY_USER);
                 leafUI.WriteLine(openFileDialog.FileName);
-                var result = device.Fastboot($"flash bootloader \"{openFileDialog.FileName}\"");
-                leafUI.Finish(result.Item2);
+                using (CommandExecutor executor = new CommandExecutor())
+                {
+                    executor.To((e) => { leafUI.WriteLine(e.Text); });
+                    var result = executor.Fastboot(device, $"flash bootloader \"{openFileDialog.FileName}\"");
+                    leafUI.Finish(result.ExitCode);
+                }
             }
         }
     }
@@ -68,8 +73,12 @@ namespace AutumnBox_exp_Nexus
                 openFileDialog.Multiselect = false;
                 if (openFileDialog.ShowDialog() != true) leafUI.Finish(LeafConstants.ERR_CANCELED_BY_USER);
                 leafUI.WriteLine(openFileDialog.FileName);
-                var result = device.Fastboot($"flash radio \"{openFileDialog.FileName}\"");
-                leafUI.Finish(result.Item2);
+                using (CommandExecutor executor = new CommandExecutor())
+                {
+                    executor.To((e) => { leafUI.WriteLine(e.Text); });
+                    var result = executor.Fastboot(device, $"flash radio \"{openFileDialog.FileName}\"");
+                    leafUI.Finish(result.ExitCode);
+                }
             }
         }
     }
@@ -80,7 +89,7 @@ namespace AutumnBox_exp_Nexus
     [ExtMinApi(8)]
     [ExtAuth("神经元")]
     [ExtDesc("给Nexus和Pixel刷入vendor.img")]
-    [ExtVersion(1, 0, 0)]
+    [ExtVersion(1, 1, 0)]
     [ExtIcon("Icons.cd.png")]
     internal class FlashNexusVendor : LeafExtensionBase
     {
@@ -101,9 +110,13 @@ namespace AutumnBox_exp_Nexus
                 openFileDialog.Multiselect = false;
                 if (openFileDialog.ShowDialog() != true) leafUI.Finish(LeafConstants.ERR_CANCELED_BY_USER);
                 leafUI.WriteLine(openFileDialog.FileName);
-                var result = device.Fastboot($"flash vendor \"{openFileDialog.FileName}\"");
-                leafUI.Finish(result.Item2);
-            }
+                using (CommandExecutor executor = new CommandExecutor())
+                    {
+                        executor.To((e) => { leafUI.WriteLine(e.Text); });
+                        var result = executor.Fastboot(device, $"flash vendor \"{openFileDialog.FileName}\"");
+                        leafUI.Finish(result.ExitCode);
+                    }
+                }
         }
     }
 
@@ -113,7 +126,7 @@ namespace AutumnBox_exp_Nexus
     [ExtMinApi(8)]
     [ExtAuth("神经元")]
     [ExtDesc("给Nexus和Pixel刷入system.img")]
-    [ExtVersion(1, 0, 0)]
+    [ExtVersion(1, 1, 0)]
     [ExtIcon("Icons.cd.png")]
     internal class FlashNexusSystem : LeafExtensionBase
     {
@@ -134,8 +147,12 @@ namespace AutumnBox_exp_Nexus
                 openFileDialog.Multiselect = false;
                 if (openFileDialog.ShowDialog() != true) leafUI.Finish(LeafConstants.ERR_CANCELED_BY_USER);
                 leafUI.WriteLine(openFileDialog.FileName);
-                var result = device.Fastboot($"flash system \"{openFileDialog.FileName}\"");
-                leafUI.Finish(result.Item2);
+                using (CommandExecutor executor = new CommandExecutor())
+                {
+                    executor.To((e) => { leafUI.WriteLine(e.Text); });
+                    var result = executor.Fastboot(device, $"flash system \"{openFileDialog.FileName}\"");
+                    leafUI.Finish(result.ExitCode);
+                }
             }
         }
     }

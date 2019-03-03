@@ -1,4 +1,5 @@
-﻿using AutumnBox.Basic.Device;
+﻿using AutumnBox.Basic.Calling;
+using AutumnBox.Basic.Device;
 using AutumnBox.OpenFramework.Extension;
 using AutumnBox.OpenFramework.LeafExtension;
 using AutumnBox.OpenFramework.LeafExtension.Fast;
@@ -27,8 +28,12 @@ namespace AutumnBox_exp_Nexus
                     e.CanBeClosed = false;
                 };
                 leafUI.Show();
-                var result = device.Fastboot("erase frp");
-                leafUI.Finish(result.Item2);
+                using (CommandExecutor executor = new CommandExecutor())
+                {
+                    executor.To((e) => { leafUI.WriteLine(e.Text); });
+                    var result = executor.Fastboot(device, "erase frp");
+                    leafUI.Finish(result.ExitCode);
+                }
             }
         }
     }

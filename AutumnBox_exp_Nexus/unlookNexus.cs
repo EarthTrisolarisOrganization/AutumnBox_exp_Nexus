@@ -45,8 +45,12 @@ namespace AutumnBox_exp_Nexus
                 }
                 if (command == null) leafUI.Finish(LeafConstants.ERR);
                 leafUI.WriteLine(command);
-                var result = device.Fastboot(command);
-                leafUI.Finish(result.Item2);
+                using (CommandExecutor executor = new CommandExecutor())
+                {
+                    executor.To((e) => { leafUI.WriteLine(e.Text); });
+                    var result = executor.Fastboot(device,command);
+                    leafUI.Finish(result.ExitCode);
+                }
             }
         }
     }   
