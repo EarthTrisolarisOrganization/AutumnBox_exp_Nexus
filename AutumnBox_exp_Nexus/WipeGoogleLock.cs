@@ -23,9 +23,9 @@ namespace AutumnBox_exp_Nexus
             using (leafUI)
             {
                 leafUI.Icon = this.GetIconBytes();
-                leafUI.CloseButtonClicked += (s, e) =>
+                leafUI.Closing += (s, e) =>
                 {
-                    e.CanBeClosed = false;
+                    return false;
                 };
                 leafUI.Show();
                 using (CommandExecutor executor = new CommandExecutor())

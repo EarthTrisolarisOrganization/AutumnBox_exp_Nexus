@@ -45,14 +45,18 @@
     <Compile Include="WipeGoogleLock.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="AutumnBox.Basic, Version=2019.2.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutumnBox.SDK.8.28.0-beta\lib\net461\AutumnBox.Basic.dll</HintPath>
+    <Reference Include="AutumnBox.Basic, Version=2019.6.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutumnBox.SDK.10.0.3-beta\lib\net461\AutumnBox.Basic.dll</HintPath>
     </Reference>
     <Reference Include="AutumnBox.Logging, Version=2019.2.12.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutumnBox.SDK.8.28.0-beta\lib\net461\AutumnBox.Logging.dll</HintPath>
+      <HintPath>..\packages\AutumnBox.SDK.10.0.3-beta\lib\net461\AutumnBox.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="AutumnBox.OpenFramework, Version=8.28.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutumnBox.SDK.8.28.0-beta\lib\net461\AutumnBox.OpenFramework.dll</HintPath>
+    <Reference Include="AutumnBox.OpenFramework, Version=10.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutumnBox.SDK.10.0.3-beta\lib\net461\AutumnBox.OpenFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -63,10 +67,12 @@
     <EmbeddedResource Include="Icons\unlock.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <EmbeddedResource Include="Icons\google.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Icons\google.png" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,12 +9,12 @@ using Microsoft.Win32;
 
 namespace AutumnBox_exp_Nexus
 {
-    [ExtName("Nexus刷入Bootloader")]
+    [ExtName("刷入Bootloader")]
     [ExtRequiredDeviceStates(DeviceState.Fastboot)]
     [ExtTargetApi(8)]
     [ExtMinApi(8)]
     [ExtAuth("神经元")]
-    [ExtDesc("给Nexus和Pixel刷入Bootloader.img")]
+    [ExtDesc("给手机刷入Bootloader.img")]
     [ExtVersion(1, 1, 0)]
     [ExtIcon("Icons.cd.png")]
     internal class FlashNexusBL : LeafExtensionBase
@@ -24,9 +24,9 @@ namespace AutumnBox_exp_Nexus
             using (leafUI)
             {
                 leafUI.Icon = this.GetIconBytes();
-                leafUI.CloseButtonClicked += (s, e) =>
+                leafUI.Closing += (s, e) =>
                 {
-                    e.CanBeClosed = false;
+                    return false;
                 };
                 leafUI.Show();
                 OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -46,12 +46,12 @@ namespace AutumnBox_exp_Nexus
         }
     }
 
-    [ExtName("Nexus刷入基带")]
+    [ExtName("刷入基带")]
     [ExtRequiredDeviceStates(DeviceState.Fastboot)]
     [ExtTargetApi(8)]
     [ExtMinApi(8)]
     [ExtAuth("神经元")]
-    [ExtDesc("给Nexus和Pixel刷入Radio.img")]
+    [ExtDesc("给手机刷入Radio.img")]
     [ExtVersion(1, 1, 0)]
     [ExtIcon("Icons.cd.png")]
     internal class FlashNexusRadio : LeafExtensionBase
@@ -61,9 +61,9 @@ namespace AutumnBox_exp_Nexus
             using (leafUI)
             {
                 leafUI.Icon = this.GetIconBytes();
-                leafUI.CloseButtonClicked += (s, e) =>
+                leafUI.Closing += (s, e) =>
                 {
-                    e.CanBeClosed = false;
+                    return false;
                 };
                 leafUI.Show();
                 OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -83,12 +83,12 @@ namespace AutumnBox_exp_Nexus
         }
     }
 
-    [ExtName("Nexus刷入Vendor")]
+    [ExtName("刷入Vendor")]
     [ExtRequiredDeviceStates(DeviceState.Fastboot)]
     [ExtTargetApi(8)]
     [ExtMinApi(8)]
     [ExtAuth("神经元")]
-    [ExtDesc("给Nexus和Pixel刷入vendor.img")]
+    [ExtDesc("给手机刷入vendor.img")]
     [ExtVersion(1, 1, 0)]
     [ExtIcon("Icons.cd.png")]
     internal class FlashNexusVendor : LeafExtensionBase
@@ -98,9 +98,9 @@ namespace AutumnBox_exp_Nexus
             using (leafUI)
             {
                 leafUI.Icon = this.GetIconBytes();
-                leafUI.CloseButtonClicked += (s, e) =>
+                leafUI.Closing += (s, e) =>
                 {
-                    e.CanBeClosed = false;
+                    return false;
                 };
                 leafUI.Show();
                 OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -120,12 +120,12 @@ namespace AutumnBox_exp_Nexus
         }
     }
 
-    [ExtName("Nexus刷入System")]
+    [ExtName("刷入System")]
     [ExtRequiredDeviceStates(DeviceState.Fastboot)]
     [ExtTargetApi(8)]
     [ExtMinApi(8)]
     [ExtAuth("神经元")]
-    [ExtDesc("给Nexus和Pixel刷入system.img")]
+    [ExtDesc("给手机刷入system.img")]
     [ExtVersion(1, 1, 0)]
     [ExtIcon("Icons.cd.png")]
     internal class FlashNexusSystem : LeafExtensionBase
@@ -135,9 +135,9 @@ namespace AutumnBox_exp_Nexus
             using (leafUI)
             {
                 leafUI.Icon = this.GetIconBytes();
-                leafUI.CloseButtonClicked += (s, e) =>
+                leafUI.Closing += (s, e) =>
                 {
-                    e.CanBeClosed = false;
+                    return false;
                 };
                 leafUI.Show();
                 OpenFileDialog openFileDialog = new OpenFileDialog();
